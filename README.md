@@ -1,2 +1,7 @@
-# delta-flights-analysis
-Project for EECS 398 at the University of Michigan
+# What is the projected delay of your Delta flight?
+By: Julia Klepko (julialuk@umich.edu)
+
+
+# Introduction
+
+T
