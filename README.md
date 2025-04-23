@@ -60,27 +60,41 @@ I was interested in creating a view of the scheduled departure timeacross all fl
 
  <iframe
  src="assets/uni1.html"
- width="100"
- height="200"
+ width="800"
+ height="600"
  frameborder="0"
  ></iframe>
-
 This was produced in a 24 bin histogram to see the amount of flights departing with that hour. It is interesting to note the stop of commercial flight departures during the night (most likely for crew to rest and for enviornmental noise), yet a significant amount of flights are in the early hours of the morning. 
 
 This can be compared with the actual departure time across all flights (`DEP_TIME`) as shown below:
  <iframe
  src="assets/uni2.html"
- width="1200"
- height="900"
+ width="800"
+ height="600"
  frameborder="0"
  ></iframe>
-
 This keeps a similar shape as the first histogram, yet the amount of flights is more averaged across the bins, mainly due to the amount of flights that are either slightly delayed or depart a few minutes ahead of schedule. 
 
-
 ## Bivariate Analysis
+
 I wanted to see if there was a visual correclation between the flight delay and the duration that the flight was in the air (`AIR_TIME` and `DEP_DELAY`).
+ <iframe
+ src="assets/bi1.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+This graph shows soome really unique results, with a large amount of shorter flights leading to large delays. It could be possible that there exists a specific cutoff to cancel any flights longer than 360 minutes (6 hours) if the delay is greater than 2 hours; this can be to have operations be more smooth in the longer distanced flights. 
+
 ## Interesting Aggregates
+There are a lot of manipulations that can be completed with this data, one of which is the the average flight duration based on origin airport. I decided to aggregate the table by using groupby for both `ORIGIN` and `AIR_TIME`, and then plotting a bar for each airport. 
+ <iframe
+ src="assets/agg1.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+The longest flight duration averages were from airports in Hawaii, as most are outbound to the continental United States.
 
 ## Imputation
 Though `DEP_DELAY` and `AIR_TIME` could theoretically have their missigng values imputation, it would be impractical and not accurately possible for this analysis. Due to  `DEP_DELAY` being the prediction column (see Baseline Model), NaN values should not be present in this prediction - attempting to impute averages can lead to the model incorrectly producing predictions. This removed around 57217 flights, or around 1.5% for this analysis. 8,379 `AIR_TIME` flights were removed as well; a visual track of the rows with this missing value was seemingly random and could seem to be easily predictable other than case-by- case. This left 3,805,204 rows for the model analysis.
