@@ -60,8 +60,8 @@ I was interested in creating a view of the scheduled departure timeacross all fl
 
  <iframe
  src="assets/uni1.html"
- width="800"
- height="600"
+ width="100"
+ height="200"
  frameborder="0"
  ></iframe>
 
