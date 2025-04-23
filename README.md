@@ -25,17 +25,19 @@ Every day, millions of flights occur all around the world. More often than not, 
 ## Data Cleaning
 A significant amount of data cleaning involved the creatiion of additional columns for further computation. The table below describes each added column and its implicaiton. Additional steps are listed as well:
 
-
 | Column     | Reasoning for Addition/Method of Computation|
 |:----------:|:------------|
 | `FL_DATE_TIME`    | Combines `FL_DATE` and `FL_TIME` into a YYYY-MM-DD TTTT format. Flights are now able to be sorted in a chronological departure order, and is necessary for calculations depending on previous flights of that day. |
-- `FL_DATE` was converted into a datetime object for additional date/time calculations
 | `AVG_DELAY_FL_NUM_PER_WEEK`   | Calculates the mean delay for the specific flight (by flight number) over the last 7 days. This is not based off of this calendar week; rather, a rolling prior 7 calendar window to this sepcific flight. This prevents skewed mean calculations that can occur at the beginning of each calendar week. |
-- `AVG_DELAY_FL_NUM_PER_WEEK` NaN converted to 0 - only relates if that flight did not exist in the dataset prior to this mention, therefore there was no prior delay to take into consideration. 
 | `DELAY_SUM_DAY`    | Total delay so far in that calendar day for that origin airport. Used in model training. |
 | `DELAYED`    | Binary column of if the flight was delayed or not; used in other column calculations. |
 | `FL_AMT_FROM_DAY_ORIGIN`    | Count of flights out of origin airport for this day, used in other column calculations. |
 | `AMT_LATE_PROP`    | Proportion of flights this day that have been delayed, calculted involving the flight date and origin, divided by `FL_AMT_FROM_DAY_ORIGIN`. Used in model training. |
+
+
+- `FL_DATE` was converted into a datetime object for additional date/time calculations
+- `AVG_DELAY_FL_NUM_PER_WEEK` NaN converted to 0 - only relates if that flight did not exist in the dataset prior to this mention, therefore there was no prior delay to take into consideration. 
 - `AMT_LATE_PROP` NaN converted to 0 - if no flights were delayed . Converted to show first 5 decimal places.
+
 
 
