@@ -99,8 +99,49 @@ The longest flight duration averages were from airports in Hawaii, as most are o
 ## Imputation
 Though `DEP_DELAY` and `AIR_TIME` could theoretically have their missigng values imputation, it would be impractical and not accurately possible for this analysis. Due to  `DEP_DELAY` being the prediction column (see Baseline Model), NaN values should not be present in this prediction - attempting to impute averages can lead to the model incorrectly producing predictions. This removed around 57217 flights, or around 1.5% for this analysis. 8,379 `AIR_TIME` flights were removed as well; a visual track of the rows with this missing value was seemingly random and could seem to be easily predictable other than case-by- case. This left 3,805,204 rows for the model analysis.
 
+
+Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
+
+Note: Make sure to justify what information you would know at the “time of prediction” and to only train your model using those features. For instance, if we wanted to predict your Final Exam grade, we couldn’t use your Final Project grade, because we (probably) won’t have the Final Project graded before the Final Exam! Feel free to ask questions if you’re not sure.
+
+
 # Framing a Prediction Problem
+As seen from the previous graphs, there are a multitude of components and information that can influence the traffic of airports an flight delays. Projecting the delay of a future Delta flight is a regression problem, as the actual delay is a numerical indicator of the minutes that the flight is delayed; it is not a category of wheteher or not the flight will be delayed as a whole. The prediction problem involes the `DEP_DELAY` variable, as this is the variable that would tell me the amount of minutes that my flight is delayed by.  The metric to evaluate this prediction model is MSE, as it alculates the mean squared difference between the hypothetical flight delay and the actual amount of time the flight was delayed by. A lower MSE will indicate that the model is better at accurately predicting the actual departure delay of the flight. 
 
 # Baseline Model
 
+I will be using the LinearRegression Model as a baseline for my analysis; there are 3 categorical and 3 numerical featuers for each model.
+
+| Feature | Info |
+|:----------:|:---------|
+| `FL_NUMBER`| Categorical, scaled with OneHotEcncoding() |
+| `FL_DATE_TIME`| Categorical, scaled with OneHotEcncoding() |
+| `ORIGIN`| Categorical, scaled with OneHotEcncoding() |
+| `AVG_DELAY_FL_NUM_PER_WEEK`| Numerical, scaled with StandardScaler()  |
+| `AMT_LATE_PROP`| Numerical, scaled with StandardScaler()  |
+| `AIR_TIME`| Numerical, scaled with StandardScaler()  |
+
+All cateogirical variables had handle_unknown=’ignore’ and drop=first to tackle issues with multicollinearity
+Train-Test Split was then performed on a test size of 0.2, causing 5 splits of data.
+
+MSE Training Set: 1275.8967436033279
+MSE Testing Set: 2465.2639053700495
+
+This base set ended up being rather suffiicient, ebign ble to have some basis of the minutes the flight. 
+
 # Final Model
+
+I ended up also running my final model on the LinearRegression Model, adding one additional categorical and one numerical feature.
+
+| Feature | Info|
+|:---------:|:---------|
+| `DELAY_SUM_DAY`| Categorical, scaled with OneHotEcncoding() |
+| `DEST`| Numerical, scaled with StandardScaler() |
+
+I believe `DELAY_SUM_DAY` assists in that if there is a large total amount of delay at a specific airport, that flight is even more likely to be delated , and `DEST` helps account for variance in the model for when a flight number and origin stay the same for example, but the airline later changes the ultimate testination of the flight.  Hyperparameters were not ran due to issues with a low RAM system; see additional notes in notebook for further information. However, the goal was to play around with the degrees to see if LinearRegression() was still optimal.
+
+Train-Test Split was then performed on a test size of 0.2, causing 5 splits of data.
+MSE Training Set: 1174.7723011375483
+MSE Testing Set: 2460.340202319307
+
+Even with the additional features, the model itself did not improve much; with the baseline model showing to be mostly suffieicent as well. The model already itself is "good", but can be possible better with taking other algorithms into consideration instead, such as possibly DescisionTreeClassifier().
