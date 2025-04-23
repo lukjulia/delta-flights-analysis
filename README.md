@@ -60,11 +60,10 @@ I was interested in creating a view of the scheduled departure timeacross all fl
 
  <iframe
  src="assets/uni2.html"
- width="800"
- height="600"
+ width="600"
+ height="400"
  frameborder="0"
- ></iframe>
- 
+ </iframe>
 
 This was produced in a 24 bin histogram to see the amount of flights departing with that hour. It is interesting to note the stop of commercial flight departures during the night (most likely for crew to rest and for enviornmental noise), yet a significant amount of flights are in the early hours of the morning. 
 
