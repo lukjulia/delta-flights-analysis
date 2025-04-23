@@ -59,15 +59,21 @@ Below is the head of the altered dataframe.
 I was interested in creating a view of the scheduled departure timeacross all flights (`CRS_DEP_TIME`)
 
  <iframe
- src="assets/uni2.html"
- width="600"
- height="400"
+ src="assets/uni1.html"
+ width="800"
+ height="600"
  frameborder="0"
  </iframe>
 
 This was produced in a 24 bin histogram to see the amount of flights departing with that hour. It is interesting to note the stop of commercial flight departures during the night (most likely for crew to rest and for enviornmental noise), yet a significant amount of flights are in the early hours of the morning. 
 
 This can be compared with the actual departure time across all flights (`DEP_TIME`) as shown below:
+ <iframe
+ src="assets/uni2.html"
+ width="1200"
+ height="900"
+ frameborder="0"
+ </iframe>
 
 This keeps a similar shape as the first histogram, yet the amount of flights is more averaged across the bins, mainly due to the amount of flights that are either slightly delayed or depart a few minutes ahead of schedule. 
 
