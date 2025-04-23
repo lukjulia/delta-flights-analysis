@@ -22,6 +22,8 @@ Every day, millions of flights occur all around the world. More often than not, 
 
 # Data Cleaning and Exploratory Data Analysis
 
+NOTE: Some visual graphs shown below were completed on a 200,000 random sample of 3,805,204 usuable rows of the dataset (see Imputation). I am currently using an 8gb RAM laptop, and even attempting to reopen the original notebook with the presence of one 3 million datapoint histogram leaves the file unusuable. This random snample was set to a random state for replciability purposes. If a smaller sample was used, it is noted in the title of the graph. 
+
 ## Data Cleaning
 A significant amount of data cleaning involved the creatiion of additional columns for further computation. The table below describes each added column and its implicaiton. Additional steps are listed as well:
 
@@ -54,7 +56,21 @@ Below is the head of the altered dataframe.
 
 
 ## Univariate Analysis 
-I was interested in creating just a simple view of the average delay across all flights (`DEP_DELAY`).
+I was interested in creating a view of the scheduled departure timeacross all flights (`CRS_DEP_TIME`)
+
+ <iframe
+ src="assets/uni2.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+ 
+
+This was produced in a 24 bin histogram to see the amount of flights departing with that hour. It is interesting to note the stop of commercial flight departures during the night (most likely for crew to rest and for enviornmental noise), yet a significant amount of flights are in the early hours of the morning. 
+
+This can be compared with the actual departure time across all flights (`DEP_TIME`) as shown below:
+
+This keeps a similar shape as the first histogram, yet the amount of flights is more averaged across the bins, mainly due to the amount of flights that are either slightly delayed or depart a few minutes ahead of schedule. 
 
 
 ## Bivariate Analysis
@@ -62,7 +78,7 @@ I wanted to see if there was a visual correclation between the flight delay and 
 ## Interesting Aggregates
 
 ## Imputation
-Though `DEP_DELAY` and `AIR_TIME` could theoretically have their missigng values imputation, it would be impractical and not accurately possible for this analysis. Due to  `DEP_DELAY` being the prediction column (see Baseline Model), NaN values should not be present in this prediction - attempting to impute averages can lead to the model incorrectly producing predictions. This removed around 57217 flights, or around 1.5% for this analysis. 8,379 `AIR_TIME` flights were removed as well; a visual track of the rows with this missing value was seemingly random and could seem to be easily predictable other than case-by- case. This left ?? rows for the model analysis.
+Though `DEP_DELAY` and `AIR_TIME` could theoretically have their missigng values imputation, it would be impractical and not accurately possible for this analysis. Due to  `DEP_DELAY` being the prediction column (see Baseline Model), NaN values should not be present in this prediction - attempting to impute averages can lead to the model incorrectly producing predictions. This removed around 57217 flights, or around 1.5% for this analysis. 8,379 `AIR_TIME` flights were removed as well; a visual track of the rows with this missing value was seemingly random and could seem to be easily predictable other than case-by- case. This left 3,805,204 rows for the model analysis.
 
 # Framing a Prediction Problem
 
