@@ -94,7 +94,7 @@ There are a lot of manipulations that can be completed with this data, one of wh
  height="600"
  frameborder="0"
  ></iframe>
-The longest flight duration averages were from airports in Hawaii, as most are outbound to the continental United States.
+The longest flight duration averages were from airports in Hawaii, as most are outbound to the continental United States. This is a useful perspective in recognizing the estimated traffic and uses for the various airports.
 
 ## Imputation
 Though `DEP_DELAY` and `AIR_TIME` could theoretically have their missigng values imputation, it would be impractical and not accurately possible for this analysis. Due to  `DEP_DELAY` being the prediction column (see Baseline Model), NaN values should not be present in this prediction - attempting to impute averages can lead to the model incorrectly producing predictions. This removed around 57217 flights, or around 1.5% for this analysis. 8,379 `AIR_TIME` flights were removed as well; a visual track of the rows with this missing value was seemingly random and could seem to be easily predictable other than case-by- case. This left 3,805,204 rows for the model analysis.
